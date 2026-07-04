@@ -1,0 +1,49 @@
+import BlogCard from "./BlogCard";
+function BlogSection() {
+    const blogPosts = [
+  {
+    tag: 'Sale',
+    category: 'English Department',
+    rating: '4.9',
+    title: 'Graphic Design',
+    image:
+      'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=720&q=80',
+  },
+  {
+    tag: 'Sale',
+    category: 'English Department',
+    rating: '4.9',
+    title: 'Graphic Design',
+    image:
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=720&q=80',
+  },
+  {
+    tag: 'Sale',
+    category: 'English Department',
+    rating: '4.9',
+    title: 'Graphic Design',
+    image:
+      'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=720&q=80',
+  },
+];
+  return (
+    <section className="bg-white">
+      <div className="mx-auto min-h-186 max-w-262.5 px-6 py-20 md:px-0">
+        <div className="mx-auto w-77.25 text-center">
+          <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#23a6f0]">
+            Practice Advice
+          </p>
+          <h2 className="mt-2.5 text-[40px] font-bold leading-[50px] tracking-[0.2px] text-[#252b42]">
+            Featured Posts
+          </h2>
+        </div>
+        <div className="mt-24 grid gap-[30px] md:grid-cols-[508px_512px]">
+          {blogPosts.slice(0, 2).map((post, index) => (
+            <BlogCard key={`${post.title}-${index}`} post={post} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+export default BlogSection;
