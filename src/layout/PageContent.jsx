@@ -1,12 +1,11 @@
-import React from 'react';
-import ShopCardsSection from '../components/PageContentComponents/ShopCardsSection';
-import ProductCardsSection from '../components/PageContentComponents/ProductCardSection';
-import ContentSection from '../components/PageContentComponents/ContentSection';
-import ClientsSection from '../components/PageContentComponents/ClientsSection';
-import FeaturesSection from '../components/PageContentComponents/FeaturesSections';
-import BlogSection from '../components/PageContentComponents/BlogSection';
-import HeroSection from '../components/HeaderComponents/HeroSection';
-
+import React from "react";
+import ShopCardsSection from "../components/PageContentComponents/ShopCardsSection";
+import ProductCardsSection from "../components/PageContentComponents/ProductCardSection";
+import ContentSection from "../components/PageContentComponents/ContentSection";
+import ClientsSection from "../components/PageContentComponents/ClientsSection";
+import FeaturesSection from "../components/PageContentComponents/FeaturesSections";
+import BlogSection from "../components/PageContentComponents/BlogSection";
+import HeroSection from "../components/HeaderComponents/HeroSection";
 
 function PageContent() {
   return (
@@ -21,6 +20,5 @@ function PageContent() {
     </div>
   );
 }
-
 
 export default PageContent;

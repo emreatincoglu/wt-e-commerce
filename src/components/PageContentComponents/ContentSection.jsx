@@ -22,9 +22,10 @@ function ContentSection() {
             We love what we do
           </h2>
           <p className="mt-4 max-w-[351px] text-sm font-bold leading-5 tracking-[0.2px] text-[#737373]">
-            Problems trying to resolve the conflict between the two major realms of Classical
-            physics: Newtonian mechanics. Problems trying to resolve the conflict between the two
-            major realms of Classical physics: Newtonian mechanics.
+            Problems trying to resolve the conflict between the two major realms
+            of Classical physics: Newtonian mechanics. Problems trying to
+            resolve the conflict between the two major realms of Classical
+            physics: Newtonian mechanics.
           </p>
         </div>
       </div>

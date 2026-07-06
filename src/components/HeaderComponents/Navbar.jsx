@@ -1,9 +1,16 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { ChevronDown, Heart, Menu, Search, ShoppingCart, User } from 'lucide-react';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import {
+  ChevronDown,
+  Heart,
+  Menu,
+  Search,
+  ShoppingCart,
+  User,
+} from "lucide-react";
 
-const navItems = ['Home', 'Shop', 'About', 'Blog', 'Contact', 'Pages'];
-const mobileNavItems = ['Home', 'Product', 'Pricing', 'Contact'];
+const navItems = ["Home", "Shop", "About", "Blog", "Contact", "Team"];
+const mobileNavItems = ["Home", "Shop", "About", "Blog", "Contact", "Team"];
 
 function Navbar() {
   return (
@@ -32,9 +39,9 @@ function Navbar() {
             {mobileNavItems.map((item) => (
               <NavLink
                 className="text-[30px] font-normal leading-[45px] tracking-[0.2px] text-[#737373]"
-                exact={item === 'Home'}
+                exact={item === "Home"}
                 key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
               >
                 {item}
               </NavLink>
@@ -56,16 +63,18 @@ function Navbar() {
           {navItems.map((item) => (
             <NavLink
               className={`flex items-center gap-1 text-sm leading-6 tracking-[0.2px] ${
-                item === 'Shop'
-                  ? 'font-medium text-[#252b42]'
-                  : 'font-bold text-[#737373] hover:text-[#252b42]'
+                item === "Shop"
+                  ? "font-medium text-[#252b42]"
+                  : "font-bold text-[#737373] hover:text-[#252b42]"
               }`}
-              exact={item === 'Home'}
+              exact={item === "Home"}
               key={item}
-              to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
             >
               <span>{item}</span>
-              {item === 'Shop' && <ChevronDown aria-hidden="true" size={14} strokeWidth={2.2} />}
+              {item === "Shop" && (
+                <ChevronDown aria-hidden="true" size={14} strokeWidth={2.2} />
+              )}
             </NavLink>
           ))}
         </div>
@@ -78,7 +87,11 @@ function Navbar() {
             <User aria-hidden="true" size={14} strokeWidth={2.3} />
             <span>Login / Register</span>
           </NavLink>
-          <button aria-label="Search" className="rounded-[37px] p-[15px]" type="button">
+          <button
+            aria-label="Search"
+            className="rounded-[37px] p-[15px]"
+            type="button"
+          >
             <Search aria-hidden="true" size={18} strokeWidth={2.2} />
           </button>
           <NavLink

@@ -1,8 +1,16 @@
 function PromoCard({ card }) {
   return (
-    <article className={`relative min-h-[261px] overflow-hidden ${card.className}`}>
-      <img alt="" className="h-full min-h-[280px] w-full object-cover" src={card.image} />
-      <div className={`absolute bg-[rgba(45,139,192,0.75)] ${card.contentClassName}`}>
+    <article
+      className={`relative min-h-[261px] overflow-hidden ${card.className}`}
+    >
+      <img
+        alt=""
+        className="h-full min-h-[280px] w-full object-cover"
+        src={card.image}
+      />
+      <div
+        className={`absolute bg-[rgba(45,139,192,0.75)] ${card.contentClassName}`}
+      >
         <h2 className="max-w-[260px] text-1xl font-bold leading-8 tracking-[0.1px] text-white">
           {card.title}
         </h2>

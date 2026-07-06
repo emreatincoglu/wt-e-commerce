@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid3X3, List } from 'lucide-react';
+import React from "react";
+import { Grid3X3, List } from "lucide-react";
 
 function ShopToolbar() {
   return (
@@ -10,7 +10,9 @@ function ShopToolbar() {
         </p>
 
         <div className="flex items-center gap-[15px]">
-          <span className="text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">Views:</span>
+          <span className="text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">
+            Views:
+          </span>
           <button
             aria-label="Grid view"
             className="flex h-[46px] w-[46px] items-center justify-center rounded-[5px] border border-[#ececec] text-[#252b42]"

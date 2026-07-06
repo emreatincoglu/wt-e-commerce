@@ -1,10 +1,12 @@
-import ProductCard from './ProductCard';
+import ProductCard from "./ProductCard";
 
 function SectionHeading({ kicker, title, body }) {
   return (
     <div className="mx-auto max-w-[692px] text-center">
       {kicker && (
-        <p className="text-xl leading-[30px] tracking-[0.2px] text-[#737373]">{kicker}</p>
+        <p className="text-xl leading-[30px] tracking-[0.2px] text-[#737373]">
+          {kicker}
+        </p>
       )}
       <h2 className="mt-2.5 text-2xl font-bold leading-8 tracking-[0.1px] text-[#252b42]">
         {title}
@@ -19,14 +21,15 @@ function SectionHeading({ kicker, title, body }) {
 }
 
 function ProductCardsSection() {
-    
-      const products = Array.from({ length: 10 }, (_, index) => ({
-  title: 'Graphic Design',
-  department: 'English Department',
-  oldPrice: '$16.48',
-  price: '$6.48',
-  image: `https://picsum.photos/seed/bandage-accurate-product-${index + 1}/366/476`,
-}));
+  const products = Array.from({ length: 12 }, (_, index) => ({
+    title: "Graphic Design",
+    id: `product-${index + 1}`,
+    department: "English Department",
+    oldPrice: "$16.48",
+    price: "$6.48",
+    image: `https://picsum.photos/seed/shop-product-${index + 1}/366/476`,
+    colors: ["#23a6f0", "#23856d", "#e77c40", "#252b42"],
+  }));
 
   return (
     <section className="bg-white">
@@ -38,7 +41,11 @@ function ProductCardsSection() {
         />
         <div className="mx-auto mt-20 grid max-w-[1035px] gap-x-[30px] gap-y-[15px] sm:grid-cols-2 md:grid-cols-5">
           {products.map((product, index) => (
-            <ProductCard key={`${product.title}-${index}`} product={product} />
+            <ProductCard
+              key={`${product.title}-${index}`}
+              product={product}
+              id={product.id}
+            />
           ))}
         </div>
         <div className="mt-8 flex justify-center">

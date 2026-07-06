@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const clientLogos = ['hooli', 'lyft', 'pied piper', 'stripe', 'aws', 'reddit'];
+const clientLogos = ["hooli", "lyft", "pied piper", "stripe", "aws", "reddit"];
 
 function ShopClients() {
   return (

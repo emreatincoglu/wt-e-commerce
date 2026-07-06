@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
 
 function ShopProductCard({ product }) {
   return (
     <article className="bg-white text-center">
-      <img alt="" className="h-[300px] w-full object-cover" src={product.image} />
+      <img
+        alt=""
+        className="h-[300px] w-full object-cover"
+        src={product.image}
+      />
       <div className="flex flex-col items-center px-6 py-[25px]">
         <h3 className="text-base font-bold leading-6 tracking-[0.1px] text-[#252b42]">
           {product.title}

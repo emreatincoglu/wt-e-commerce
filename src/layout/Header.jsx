@@ -1,7 +1,7 @@
-import React from 'react';
-import HeroSection from '../components/HeaderComponents/HeroSection';
-import Navbar from '../components/HeaderComponents/Navbar';
-import Socials from '../components/HeaderComponents/Socials';
+import React from "react";
+import HeroSection from "../components/HeaderComponents/HeroSection";
+import Navbar from "../components/HeaderComponents/Navbar";
+import Socials from "../components/HeaderComponents/Socials";
 
 function Header() {
   return (

@@ -1,29 +1,29 @@
-import PromoCard from './PromoCard';
+import PromoCard from "./PromoCard";
 function ShopCardsSection() {
-
-    const categoryCards = [
-  {
-    title: 'Top Product Of the Week',
-    className: 'md:h-[572px]',
-    contentClassName: 'bottom-0 left-0 h-[238px] w-[420px] pl-[66px] pt-[60px]',
-    image:
-      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Top Product Of the Week',
-    className: 'md:h-[289px]',
-    contentClassName: 'bottom-0 left-0 h-[173px] w-[347px] pl-9 pt-10',
-    image:
-      'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Top Product Of the Week',
-    className: 'md:h-[261px]',
-    contentClassName: 'bottom-0 left-0 h-[153px] w-[360px] pl-9 pt-7',
-    image:
-      'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80',
-  },
-];
+  const categoryCards = [
+    {
+      title: "Top Product Of the Week",
+      className: "md:h-[572px]",
+      contentClassName:
+        "bottom-0 left-0 h-[238px] w-[420px] pl-[66px] pt-[60px]",
+      image:
+        "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      title: "Top Product Of the Week",
+      className: "md:h-[289px]",
+      contentClassName: "bottom-0 left-0 h-[173px] w-[347px] pl-9 pt-10",
+      image:
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      title: "Top Product Of the Week",
+      className: "md:h-[261px]",
+      contentClassName: "bottom-0 left-0 h-[153px] w-[360px] pl-9 pt-7",
+      image:
+        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80",
+    },
+  ];
 
   return (
     <section className="bg-white">

@@ -1,7 +1,7 @@
-import React from 'react';
-import FooterBrand from '../components/FooterComponents/FooterBrand';
-import FooterCopyright from '../components/FooterComponents/FooterCopyright';
-import FooterLinks from '../components/FooterComponents/FooterLinks';
+import React from "react";
+import FooterBrand from "../components/FooterComponents/FooterBrand";
+import FooterCopyright from "../components/FooterComponents/FooterCopyright";
+import FooterLinks from "../components/FooterComponents/FooterLinks";
 
 function Footer() {
   return (

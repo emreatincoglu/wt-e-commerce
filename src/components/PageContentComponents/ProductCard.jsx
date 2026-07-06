@@ -1,9 +1,11 @@
 function ProductCard({ product }) {
-    
-    
   return (
     <article className="w-full bg-white text-center md:w-[183px]">
-      <img alt="" className="h-[238px] w-full object-cover" src={product.image} />
+      <img
+        alt=""
+        className="h-[238px] w-full object-cover"
+        src={product.image}
+      />
       <div className="flex h-[162px] flex-col items-center px-0 pt-[25px]">
         <h3 className="text-base font-bold leading-6 tracking-[0.1px] text-[#252b42]">
           {product.title}
