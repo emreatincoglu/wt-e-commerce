@@ -85,7 +85,7 @@ function Navbar() {
             to="/login"
           >
             <User aria-hidden="true" size={14} strokeWidth={2.3} />
-            <span>Login / Register</span>
+            <span>Login / Sign Up</span>
           </NavLink>
           <button
             aria-label="Search"
