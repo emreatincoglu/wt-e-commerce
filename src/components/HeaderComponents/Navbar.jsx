@@ -9,8 +9,8 @@ import {
   User,
 } from "lucide-react";
 
-const navItems = ["Home", "Shop", "About", "Blog", "Contact", "Team"];
-const mobileNavItems = ["Home", "Shop", "About", "Blog", "Contact", "Team"];
+const navItems = ["Home", "Shop", "Blog", "Contact", "Team"];
+const mobileNavItems = ["Home", "Shop", "Blog", "Contact", "Team"];
 
 function Navbar() {
   return (
@@ -85,7 +85,14 @@ function Navbar() {
             to="/login"
           >
             <User aria-hidden="true" size={14} strokeWidth={2.3} />
-            <span>Login / Sign Up</span>
+            <span>Login</span>
+          </NavLink>
+          <NavLink
+            className="hidden items-center gap-[5px] rounded-[37px] p-[15px] text-sm font-bold leading-6 tracking-[0.2px] lg:flex"
+            to="/signup"
+          >
+            <User aria-hidden="true" size={14} strokeWidth={2.3} />
+            <span> Sign Up</span>
           </NavLink>
           <button
             aria-label="Search"
