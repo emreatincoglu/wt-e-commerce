@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { getRoles } from "../../actions/clientActions";
 import axiosInstance from "../../api/axiosInstance";
 
 const inputClassName =
@@ -73,22 +75,17 @@ function SignupForm() {
     shouldUnregister: true,
   });
 
-  const [roles, setRoles] = useState([]);
+  const dispatch = useDispatch();
+
+  const roles = useSelector((state) => state.client.roles);
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    axiosInstance
-      .get("/roles")
-      .then((response) => {
-        setRoles([...response.data].reverse());
-      })
-      .catch((error) => {
-        console.error("Error fetching roles:", error);
-        toast.error("Roles could not be loaded.");
-      });
+    dispatch(getRoles());
   }, []);
+
 
   const selectedRoleId = watch("role_id");
   const selectedRole = useMemo(
@@ -130,7 +127,9 @@ function SignupForm() {
       .post("/signup", payload)
       .then((response) => {
         console.log("Signup successful:", response.data);
-        toast.success("Signup successful. Please click the link in your email to activate your account.");
+        toast.success(
+          "Signup successful. Please click the link in your email to activate your account.",
+        );
         reset();
         history.push("/");
       })
@@ -364,7 +363,7 @@ function SignupForm() {
         <button
           type="submit"
           disabled={loading || !isValid}
-          className="mt-1 w-full rounded-full bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-transform hover:bg-blue-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-1 w-full rounded-full bg-sky-400 px-6 py-2 text-sm font-medium text-white transition-transform hover:bg-sky-500 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Loading..." : "Gönder"}
         </button>
