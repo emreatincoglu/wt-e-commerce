@@ -6,4 +6,12 @@ const instance = axios.create({
   headers: { "X-Custom-Header": "foobar" },
 });
 
+export const setAuthToken = (token) => {
+  if (token) {
+    instance.defaults.headers.common.Authorization = token;
+  } else {
+    delete instance.defaults.headers.common.Authorization;
+  }
+};
+
 export default instance;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AlertTriangle, Ban, Bell, CheckCircle2, Info, X } from "lucide-react";
@@ -9,6 +9,10 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import ShopPage from "./pages/ShopPage";
 import TeamPage from "./pages/TeamPage";
 import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import instance from "./api/axiosInstance";
+import { useDispatch } from "react-redux";
+import { verifyUser } from "./actions/clientActions";
 
 const toastIconByType = {
   success: CheckCircle2,
@@ -31,7 +35,16 @@ function ToastCloseButton({ closeToast }) {
   );
 }
 
+
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(verifyUser());
+  }, [])
+
+
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <main>
@@ -44,6 +57,7 @@ function App() {
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/team" component={TeamPage} />
           <Route exact path="/signup" component={SignupPage} />
+          <Route exact path="/login" component={LoginPage} />
         </Switch>
       </main>
       <ToastContainer

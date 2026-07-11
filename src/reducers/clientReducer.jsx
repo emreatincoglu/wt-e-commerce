@@ -3,7 +3,8 @@ import {
   SET_ROLES,
   SET_THEME,
   SET_LANGUAGE,
-    GET_ROLES,
+  GET_ROLES,
+  SET_LOADING,
 } from "../actions/clientActions";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   roles: [],
   theme: "light",
   language: "en",
+  loading: false,
 };
 
 function clientReducer(state = initialState, action) {
@@ -27,6 +29,8 @@ function clientReducer(state = initialState, action) {
       return { ...state, language: action.payload };
     case GET_ROLES:
       return { ...state, roles: action.payload };
+    case SET_LOADING:
+      return { ...state, loading: action.payload };
     default:
       return state;
   }
