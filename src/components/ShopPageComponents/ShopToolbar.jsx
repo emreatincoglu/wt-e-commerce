@@ -1,12 +1,20 @@
-import React from "react";
 import { Grid3X3, List } from "lucide-react";
+import React, { useEffect } from "react";
+import ShopProductCard from "./ShopProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../actions/productActions";
+
 
 function ShopToolbar() {
+
+const products = useSelector((store) => store.product.productList);
+
+
   return (
     <section className="bg-white font-['Montserrat',ui-sans-serif,system-ui]">
       <div className="mx-auto flex min-h-[98px] max-w-[1050px] flex-col items-center justify-between gap-6 px-6 py-6 md:flex-row md:px-0">
         <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">
-          Showing all 12 results
+          Showing all {products.length} results
         </p>
 
         <div className="flex items-center gap-[15px]">
