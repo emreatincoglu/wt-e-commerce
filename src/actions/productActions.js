@@ -1,3 +1,5 @@
+import instance from "../api/axiosInstance";
+
 export const SET_CATEGORIES = "SET_CATEGORIES";
 export const SET_PRODUCT_LIST = "SET_PRODUCT_LIST";
 export const SET_TOTAL = "SET_TOTAL";
@@ -54,3 +56,14 @@ export function setFilter(filter) {
     payload: filter,
   };
 }
+
+export const getCategories = () => (dispatch) => {
+  instance.get("/categories")
+    .then((response) => {
+      dispatch(setCategories(response.data));
+    })
+    .catch((error) => {
+      console.error("Error fetching roles:", error);
+    });
+};
+

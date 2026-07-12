@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import Gravatar from 'react-gravatar';
 import {
   ChevronDown,
@@ -9,14 +9,72 @@ import {
   ShoppingCart,
   User,
 } from "lucide-react";
-import { useSelector } from "react-redux";
-
-const navItems = ["Home", "Shop", "Blog", "Contact", "Team"];
-const mobileNavItems = ["Home", "Shop", "Blog", "Contact", "Team"];
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../actions/productActions";
 
 function Navbar() {
   const user = useSelector((state) => state.client.user);
+  const categories = useSelector((store) => store.product.categories);
   const isLoggedIn = user && user.token;
+  const history = useHistory();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  const categoryColumns = useMemo(() => {
+    const groups = {
+      kadin: [],
+      erkek: [],
+    };
+
+    categories.forEach((category) => {
+      const genderValue = String(category.gender || category.code?.split(":")[0] || "").toLocaleLowerCase("tr-TR");
+
+      if (["k", "kadin", "kadın", "female", "woman", "women"].includes(genderValue)) {
+        groups.kadin.push(category);
+      }
+
+      if (["e", "erkek", "male", "man", "men"].includes(genderValue)) {
+        groups.erkek.push(category);
+      }
+    });
+
+    return {
+      kadin: groups.kadin,
+      erkek: groups.erkek
+    };
+  }, [categories]);
+
+  const navigateTo = (path) => {
+    history.push(path);
+  };
+
+  const navigateToCategory = (category) => {
+    history.push(`/shop/${category.gender === 'k' ? 'kadin' : 'erkek' }/${category.title}/${category.id}`);
+  };
+
+  const isActivePath = (path) => {
+    if (path === "/") {
+      return location.pathname === "/";
+    }
+
+    return location.pathname.startsWith(path);
+  };
+
+  const desktopNavClassName = (path, isShop = false) =>
+    `flex items-center gap-1 text-sm leading-6 tracking-[0.2px] ${
+      isShop || isActivePath(path)
+        ? "font-medium text-[#252b42]"
+        : "font-bold text-[#737373] hover:text-[#252b42]"
+    }`;
+
+  const mobileNavClassName = (path) =>
+    `text-[30px] font-normal leading-[45px] tracking-[0.2px] ${
+      isActivePath(path) ? "text-[#252b42]" : "text-[#737373]"
+    }`;
 
   return (
     <>
@@ -44,16 +102,21 @@ function Navbar() {
           </div>
 
           <nav className="absolute left-1/2 top-[164px] flex -translate-x-1/2 flex-col items-center gap-[30px]">
-            {mobileNavItems.map((item) => (
-              <NavLink
-                className="text-[30px] font-normal leading-[45px] tracking-[0.2px] text-[#737373]"
-                exact={item === "Home"}
-                key={item}
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              >
-                {item}
-              </NavLink>
-            ))}
+            <button className={mobileNavClassName("/")} onClick={() => navigateTo("/")} type="button">
+              Home
+            </button>
+            <button className={mobileNavClassName("/shop")} onClick={() => navigateTo("/shop")} type="button">
+              Shop
+            </button>
+            <button className={mobileNavClassName("/blog")} onClick={() => navigateTo("/blog")} type="button">
+              Blog
+            </button>
+            <button className={mobileNavClassName("/contact")} onClick={() => navigateTo("/contact")} type="button">
+              Contact
+            </button>
+            <button className={mobileNavClassName("/team")} onClick={() => navigateTo("/team")} type="button">
+              Team
+            </button>
 
             
             <div className="mt-4 flex flex-col items-center gap-4 text-[#23a6f0]">
@@ -90,23 +153,56 @@ function Navbar() {
         </NavLink>
 
         <div className="flex flex-1 items-center gap-[15px]">
-          {navItems.map((item) => (
-            <NavLink
-              className={`flex items-center gap-1 text-sm leading-6 tracking-[0.2px] ${
-                item === "Shop"
-                  ? "font-medium text-[#252b42]"
-                  : "font-bold text-[#737373] hover:text-[#252b42]"
-              }`}
-              exact={item === "Home"}
-              key={item}
-              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-            >
-              <span>{item}</span>
-              {item === "Shop" && (
-                <ChevronDown aria-hidden="true" size={14} strokeWidth={2.2} />
-              )}
-            </NavLink>
-          ))}
+          <button className={desktopNavClassName("/")} onClick={() => navigateTo("/")} type="button">
+            <span>Home</span>
+          </button>
+          <div className="group relative">
+            <button className={desktopNavClassName("/shop", true)} onClick={() => navigateTo("/shop")} type="button">
+              <span>Shop</span>
+              <ChevronDown aria-hidden="true" size={14} strokeWidth={2.2} />
+            </button>
+
+            <div className="invisible absolute left-0 top-full z-30 grid w-[330px] grid-cols-2 gap-x-10 bg-white px-8 py-8 opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div className="flex flex-col gap-5">
+                <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#252b42]">Kadın</p>
+                {categoryColumns.kadin.map((category) => (
+                  <button
+                    className="text-left text-sm font-bold leading-6 tracking-[0.2px] text-[#737373] hover:text-[#252b42]"
+                    key={category.id}
+                    onClick={() => navigateToCategory(category)}
+                    type="button"
+                  >
+                    {category.title}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-5">
+                <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#252b42]">Erkek</p>
+                {categoryColumns.erkek.map((category) => (
+                  <button
+                    className="text-left text-sm font-bold leading-6 tracking-[0.2px] text-[#737373] hover:text-[#252b42]"
+                    key={category.id}
+                    onClick={() => navigateToCategory(category)}
+                    type="button"
+                  >
+                    {category.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <button className={desktopNavClassName("/blog")} onClick={() => navigateTo("/blog")} type="button">
+            <span>Blog</span>
+          </button>
+          <button className={desktopNavClassName("/contact")} onClick={() => navigateTo("/contact")} type="button">
+            <span>Contact</span>
+          </button>
+          <button className={desktopNavClassName("/team")} onClick={() => navigateTo("/team")} type="button">
+            <span>Team</span>
+          </button>
+
+          
         </div>
 
         {/* SAĞ MENÜ: Giriş Kontrolleri ve İkonlar */}

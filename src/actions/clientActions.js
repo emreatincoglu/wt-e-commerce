@@ -122,10 +122,7 @@ export const getRoles = () => (dispatch, getState) => {
   instance.get("/roles")
     .then((response) => {
       // 3. BAŞARILI DURUM: Gelen veriyi store'a yaz
-      dispatch({
-        type: "SET_ROLES", // Veya action dosyasında tanımladığın değişken (örn: SET_ROLES)
-        payload: [...response.data].reverse(), // API'den gelen veriyi payload olarak gönder
-      });
+      dispatch(setRoles([...response.data].reverse()));
     })
     .catch((error) => {
       // 4. HATA DURUMU: .catch bloğu dispatch'in değil, then bloğunun sonundadır

@@ -1,55 +1,50 @@
 import React from "react";
-
-const categories = [
-  {
-    title: "CLOTHS",
-    image:
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    title: "CLOTHS",
-    image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    title: "CLOTHS",
-    image:
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    title: "CLOTHS",
-    image:
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    title: "CLOTHS",
-    image:
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80",
-  },
-];
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
+import { getCategories } from "../../actions/productActions";
 
 function ShopCategoryCards() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  const categories = useSelector((store) => store.product.categories);
+
+  const navigateToCategory = (category) => {
+    history.push(`/shop/${category.gender === 'k' ? 'kadin' : 'erkek' }/${category.title}/${category.id}`);
+  };
+
+  const topCategories = [...categories]
+  .sort((a, b) => b.rating - a.rating)
+  .slice(0, 5);
+
   return (
     <section className="bg-[#fafafa] font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto grid max-w-[1088px] gap-[15px] px-6 pb-12 pt-4 sm:grid-cols-2 lg:grid-cols-5 lg:px-0">
-        {categories.map((category, index) => (
+      <div className="mx-auto grid max-w-[1088px] gap-[15px] px-6 pb-12 pt-4 sm:grid-cols-2 lg:grid-cols-5 lg:px-0" >
+        {topCategories.map((category, index) => (
           <a
             className="group relative flex h-[223px] items-center justify-center overflow-hidden bg-[#252b42]"
             href="/shop"
             key={`${category.title}-${index}`}
+            onClick={() => navigateToCategory(category)}
           >
             <img
               alt=""
               className="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-300 group-hover:scale-105"
-              src={category.image}
+              src={category.img}
             />
             <div className="absolute inset-0 bg-black/25" />
             <div className="relative text-center text-white">
               <h2 className="text-base font-bold leading-6 tracking-[0.1px]">
-                {category.title}
+                {category.gender === 'k' ? 'Kadın' : 'Erkek'} {category.title}
               </h2>
               <p className="mt-1 text-sm font-bold leading-6 tracking-[0.2px]">
-                5 Items
+                {category.rating}
               </p>
             </div>
           </a>
