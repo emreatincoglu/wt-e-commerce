@@ -4,18 +4,16 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../actions/productActions";
+import instance from "../../api/axiosInstance";
 
 function ShopCategoryCards() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
-
   const categories = useSelector((store) => store.product.categories);
 
-  const navigateToCategory = (category) => {
+  const navigateToCategory = (e, category) => {
+    e.preventDefault();
     history.push(`/shop/${category.gender === 'k' ? 'kadin' : 'erkek' }/${category.title}/${category.id}`);
   };
 
@@ -31,7 +29,7 @@ function ShopCategoryCards() {
             className="group relative flex h-[223px] items-center justify-center overflow-hidden bg-[#252b42]"
             href="/shop"
             key={`${category.title}-${index}`}
-            onClick={() => navigateToCategory(category)}
+            onClick={(e) => navigateToCategory(e, category)}
           >
             <img
               alt=""

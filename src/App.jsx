@@ -29,21 +29,23 @@ function ToastIcon({ type }) {
 
 function ToastCloseButton({ closeToast }) {
   return (
-    <button type="button" className="toast-alert-close" onClick={closeToast} aria-label="Close alert">
+    <button
+      type="button"
+      className="toast-alert-close"
+      onClick={closeToast}
+      aria-label="Close alert"
+    >
       <X aria-hidden="true" strokeWidth={3} />
     </button>
   );
 }
 
-
 function App() {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(verifyUser());
-  }, [])
-
+  }, []);
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
@@ -52,6 +54,9 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/about-us" component={AboutPage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop/:gender/:categoryName/:categoryId">
+            <ShopPage/>
+          </Route>
           <Route exact path="/product" component={ProductDetailPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
           <Route exact path="/contact" component={ContactPage} />

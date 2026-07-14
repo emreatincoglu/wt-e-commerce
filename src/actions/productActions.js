@@ -7,6 +7,7 @@ export const SET_FETCH_STATE = "SET_FETCH_STATE";
 export const SET_LIMIT = "SET_LIMIT";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_FILTER = "SET_FILTER";
+export const SET_SORT_STATE = "SET_SORT_STATE"
 
 export function setCategories(categories) {
   return {
@@ -57,25 +58,36 @@ export function setFilter(filter) {
   };
 }
 
+export function setSortState(sort) {
+  return {
+    type: SET_SORT_STATE,
+    payload: sort,
+  };
+}
+
 export const getCategories = () => (dispatch) => {
   instance.get("/categories")
     .then((response) => {
       dispatch(setCategories(response.data));
     })
     .catch((error) => {
-      console.error("Error fetching roles:", error);
+      console.error("Error fetching categories:", error);
     });
 };
+export const getProducts = (categoryId, filter, sort) => (dispatch) => {
+  const queryParams = {};
 
-export const getProducts = () => (dispatch) => {
-  instance.get("/products")
+  if (categoryId) queryParams.category = categoryId;
+  if (filter) queryParams.filter = filter;
+  if (sort) queryParams.sort = sort;
+
+  instance.get("/products", { params: queryParams })
     .then((response) => {
       dispatch(setProductList(response.data.products));
       dispatch(setTotal(response.data.total));
       dispatch(setFetchState('FETCHED'));
     })
     .catch((error) => {
-      console.error("Error fetching roles:", error);
+      console.error("Error fetching products:", error);
     });
 };
-
