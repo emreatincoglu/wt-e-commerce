@@ -1,27 +1,81 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ShopProductCard from "./ShopProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setFetchState } from "../../actions/productActions";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  getProducts,
+  setFetchState,
+  setOffset,
+} from "../../actions/productActions";
+import { useLocation, useParams } from "react-router-dom";
+import ShopPagination from "./ShopPagination";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+
 
 function ShopProducts() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const categories = useSelector((store) => store.product.categories);
   const products = useSelector((store) => store.product.productList);
   const fetchStatus = useSelector((store) => store.product.fetchState);
   const filter = useSelector((store) => store.product.filter);
   const sort = useSelector((store) => store.product.sort);
-  let params = useParams();
+  const limit = useSelector((store) => store.product.limit);
+  const offset = useSelector((store) => store.product.offset);
+  const total = useSelector((store) => store.product.total);
+
+  const params = useParams();
+  const location = useLocation();
+  const queryCategoryId = new URLSearchParams(location.search).get("category");
+  const categoryId = params.categoryId || queryCategoryId;
 
   const isFetched = fetchStatus === "NOT_FETCHED";
 
+  const pageCount = Math.ceil(total / limit);
+  const currentPage = Math.floor(offset / limit);
+  const queryKey = `${categoryId || ""}|${filter}|${sort}|${limit}`;
+  const previousQueryKey = useRef(queryKey);
 
+  const handlePageClick = (event) => {
+    const newOffset = event.selected * limit;
+    dispatch(setOffset(newOffset));
+  };
+
+  function handleProductClick(productItem) {
+    const productCategoryId = productItem.category_id;
+    const category = categories.find(
+      (category) => category.id === productCategoryId,
+    );
+
+    const productNameSlug = productItem.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "-")
+      .replace(/-+/g, "-");
+
+    history.push(
+      `/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title}/${category.id}/${productNameSlug}/${productItem.id}`,
+    );
+    
+    
+  };
+
+  
+  
 
   useEffect(() => {
-    dispatch(setFetchState("NOT_FETCHED"));
+    if (previousQueryKey.current !== queryKey) {
+      previousQueryKey.current = queryKey;
 
-   dispatch(getProducts(params.categoryId, filter, sort));
-    
-  }, [params.categoryId, filter, sort]);
+      if (offset !== 0) {
+        dispatch(setOffset(0));
+        return;
+      }
+    }
+
+    dispatch(setFetchState("NOT_FETCHED"));
+    dispatch(getProducts(categoryId, filter, sort, limit, offset));
+  }, [categoryId, dispatch, filter, limit, offset, queryKey, sort]);
 
   return isFetched ? (
     <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
@@ -59,47 +113,25 @@ function ShopProducts() {
               key={`${product.name}-${index}`}
               product={product}
               id={product.id}
+              handleProductClick={handleProductClick}
             />
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
-          <div className="flex overflow-hidden rounded-[6px] border border-[#bdbdbd] text-sm font-bold leading-6 tracking-[0.2px]">
-            <button
-              className="bg-[#f3f3f3] px-[15px] py-[20px] text-[#bdbdbd]"
-              type="button"
-            >
-              First
-            </button>
-            <button
-              className="border-l border-[#bdbdbd] px-3 py-[20px] text-[#23a6f0]"
-              type="button"
-            >
-              1
-            </button>
-            <button
-              className="bg-[#23a6f0] px-3 py-[20px] text-white"
-              type="button"
-            >
-              2
-            </button>
-            <button
-              className="border-l border-[#bdbdbd] px-3 py-[20px] text-[#23a6f0]"
-              type="button"
-            >
-              3
-            </button>
-            <button
-              className="border-l border-[#bdbdbd] px-[15px] py-[20px] text-[#23a6f0]"
-              type="button"
-            >
-              Next
-            </button>
-          </div>
+        <div className="mt-12 min-w-0">
+          <ShopPagination
+            currentPage={currentPage}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+          />
         </div>
       </div>
     </section>
   );
 }
 
+
+
 export default ShopProducts;
+
+

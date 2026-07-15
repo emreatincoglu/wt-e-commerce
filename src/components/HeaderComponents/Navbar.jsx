@@ -30,7 +30,7 @@ function Navbar() {
       erkek: [],
     };
 
-    categories.forEach((category) => {
+    categories?.forEach((category) => {
       const genderValue = String(category.gender || category.code?.split(":")[0] || "").toLocaleLowerCase("tr-TR");
 
       if (["k", "kadin", "kadın", "female", "woman", "women"].includes(genderValue)) {

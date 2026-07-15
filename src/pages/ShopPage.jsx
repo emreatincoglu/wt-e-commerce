@@ -15,7 +15,7 @@ function ShopPage() {
         <ShopTitle />
         <ShopCategoryCards />
         <ShopToolbar />
-        <ShopProducts />
+        <ShopProducts/>
         <ShopClients />
       </main>
       <Footer />

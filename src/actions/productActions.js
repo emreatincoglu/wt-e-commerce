@@ -8,6 +8,22 @@ export const SET_LIMIT = "SET_LIMIT";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_FILTER = "SET_FILTER";
 export const SET_SORT_STATE = "SET_SORT_STATE"
+export const SET_CURRENT_PRODUCT = "SET_CURRENT_PRODUCT"
+export const SET_PRODUCT_FETCH_STATE = "SET_PRODUCT_FETCH_STATE";
+
+export function setCurrentProduct(currentProduct) {
+  return {
+    type: SET_CURRENT_PRODUCT,
+    payload: currentProduct,
+  };
+}
+
+export function setProductFetchState(productFetchState) {
+  return {
+    type: SET_PRODUCT_FETCH_STATE,
+    payload: productFetchState,
+  };
+}
 
 export function setCategories(categories) {
   return {
@@ -74,12 +90,14 @@ export const getCategories = () => (dispatch) => {
       console.error("Error fetching categories:", error);
     });
 };
-export const getProducts = (categoryId, filter, sort) => (dispatch) => {
+export const getProducts = (categoryId, filter, sort, limit, offset) => (dispatch) => {
   const queryParams = {};
 
   if (categoryId) queryParams.category = categoryId;
   if (filter) queryParams.filter = filter;
   if (sort) queryParams.sort = sort;
+  if (limit !== undefined && limit !== null) queryParams.limit = limit;
+  if (offset !== undefined && offset !== null) queryParams.offset = offset;
 
   instance.get("/products", { params: queryParams })
     .then((response) => {
@@ -89,5 +107,20 @@ export const getProducts = (categoryId, filter, sort) => (dispatch) => {
     })
     .catch((error) => {
       console.error("Error fetching products:", error);
+    });
+};
+
+export const getProduct = (productId) => (dispatch) => {
+  dispatch(setProductFetchState("FETCHING"));
+
+  return instance.get(`/products/${productId}`)
+    .then((response) => {
+      dispatch(setCurrentProduct(response.data));
+      dispatch(setProductFetchState("FETCHED"));
+    })
+    .catch((error) => {
+      dispatch(setProductFetchState("FAILED"));
+      console.error("Error fetching product:", error);
+      throw error;
     });
 };

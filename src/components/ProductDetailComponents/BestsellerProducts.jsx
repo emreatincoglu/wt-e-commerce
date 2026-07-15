@@ -1,17 +1,37 @@
 import React from "react";
 import ShopProductCard from "../ShopPageComponents/ShopProductCard";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
-const products = Array.from({ length: 12 }, (_, index) => ({
-  title: "Graphic Design",
-  id: `product-${index + 1}`,
-  department: "English Department",
-  oldPrice: "$16.48",
-  price: "$6.48",
-  image: `https://picsum.photos/seed/shop-product-${index + 1}/366/476`,
-  colors: ["#23a6f0", "#23856d", "#e77c40", "#252b42"],
-}));
+
 
 function BestsellerProducts() {
+
+  
+ const products = useSelector((store) => store.product.productList);
+ const categories = useSelector((store) => store.product.categories);
+ const history = useHistory();
+
+ const topProducts = [...products].sort((a, b) => b.rating - a.rating)
+  .slice(0, 8);
+
+function handleProductClick(productItem) {
+    const productCategoryId = productItem.category_id;
+    const category = categories.find(
+      (category) => category.id === productCategoryId,
+    );
+
+    const productNameSlug = productItem.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "-")
+      .replace(/-+/g, "-");
+
+    history.push(
+      `/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title}/${category.id}/${productNameSlug}/${productItem.id}`,
+    );
+    
+    
+  };
   return (
     <section className="bg-[#fafafa] font-['Montserrat',ui-sans-serif,system-ui]">
       <div className="mx-auto max-w-[1050px] px-6 py-12 md:px-0">
@@ -19,11 +39,12 @@ function BestsellerProducts() {
           BESTSELLER PRODUCTS
         </h2>
         <div className="mt-6 grid gap-[30px] sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product, index) => (
+          {topProducts.map((product, index) => (
             <ShopProductCard
               key={`${product.title}-${index}`}
               product={product}
               id={product.id}
+              handleProductClick={handleProductClick}
             />
           ))}
         </div>
