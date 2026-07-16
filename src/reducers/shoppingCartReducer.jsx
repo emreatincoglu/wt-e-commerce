@@ -2,6 +2,9 @@ import {
   SET_CART,
   SET_PAYMENT,
   SET_ADRESS,
+  UPDATE_CART_ITEM_COUNT,
+  REMOVE_CART_ITEM,
+  TOGGLE_CART_ITEM,
 } from "../actions/shoppingCartActions";
 
 const initialState = {
@@ -47,6 +50,29 @@ function shoppingCartReducer(state = initialState, action) {
       return { ...state, payment: action.payload };
     case SET_ADRESS:
       return { ...state, adress: action.payload };
+    case UPDATE_CART_ITEM_COUNT:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload.productId
+            ? { ...item, count: Math.max(1, action.payload.count) }
+            : item,
+        ),
+      };
+    case REMOVE_CART_ITEM:
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.product.id !== action.payload),
+      };
+    case TOGGLE_CART_ITEM:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload
+            ? { ...item, checked: !item.checked }
+            : item,
+        ),
+      };
     default:
       return state;
   }

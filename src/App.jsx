@@ -10,6 +10,7 @@ import ShopPage from "./pages/ShopPage";
 import TeamPage from "./pages/TeamPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 import instance from "./api/axiosInstance";
 import { useDispatch } from "react-redux";
 import { verifyUser } from "./actions/clientActions";
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/about-us" component={AboutPage} />
           <Route exact path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" component={ProductDetailPage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/cart" component={ShoppingCartPage} />
           <Route path="/shop/:gender/:categoryName/:categoryId">
             <ShopPage/>
           </Route>
