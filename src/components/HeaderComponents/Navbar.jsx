@@ -6,11 +6,11 @@ import {
   Heart,
   Menu,
   Search,
-  ShoppingCart,
   User,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../actions/productActions";
+import ShoppingCartDropdown from "./ShoppingCartDropdown";
 
 function Navbar() {
   const user = useSelector((state) => state.client.user);
@@ -93,9 +93,7 @@ function Navbar() {
             <button aria-label="Search" type="button">
               <Search aria-hidden="true" size={24} strokeWidth={2} />
             </button>
-            <NavLink aria-label="Cart" to="/cart">
-              <ShoppingCart aria-hidden="true" size={24} strokeWidth={2} />
-            </NavLink>
+            <ShoppingCartDropdown mobile />
             <button aria-label="Menu" type="button">
               <Menu aria-hidden="true" size={25} strokeWidth={2} />
             </button>
@@ -205,11 +203,9 @@ function Navbar() {
           
         </div>
 
-        {/* SAĞ MENÜ: Giriş Kontrolleri ve İkonlar */}
         <div className="flex items-center text-[#23a6f0]">
           
           {isLoggedIn ? (
-            // Kullanıcı Giriş Yapmışsa: Profil Resmi ve İsim Tek Kapsayıcıda Hizalandı
             <div className="flex items-center gap-2 p-[15px]">
               <div className="h-7 w-7 shrink-0 overflow-hidden rounded-full border border-slate-200">
                 <Gravatar 
@@ -224,7 +220,6 @@ function Navbar() {
               </span>
             </div>
           ) : (
-            // Kullanıcı Giriş Yapmamışsa: Linkler Yan Yana Hizalandı
             <div className="flex items-center">
               <NavLink
                 className="hidden items-center gap-[5px] rounded-[37px] p-[15px] text-sm font-bold leading-6 tracking-[0.2px] lg:flex"
@@ -243,7 +238,6 @@ function Navbar() {
             </div>
           )}
 
-          {/* Standart İkonlar: flex ve items-center yapılarıyla dikey kaymaları engellendi */}
           <button
             aria-label="Search"
             className="flex items-center justify-center rounded-[37px] p-[15px]"
@@ -251,16 +245,9 @@ function Navbar() {
           >
             <Search aria-hidden="true" size={18} strokeWidth={2.2} />
           </button>
-          
-          <NavLink
-            aria-label="Cart with 1 item"
-            className="flex items-center gap-[5px] rounded-[37px] p-[15px]"
-            to="/cart"
-          >
-            <ShoppingCart aria-hidden="true" size={18} strokeWidth={2.2} />
-            <span className="text-xs leading-4 tracking-[0.2px]">1</span>
-          </NavLink>
-          
+
+          <ShoppingCartDropdown />
+
           <NavLink
             aria-label="Wishlist with 1 item"
             className="flex items-center gap-[5px] rounded-[37px] p-[15px]"

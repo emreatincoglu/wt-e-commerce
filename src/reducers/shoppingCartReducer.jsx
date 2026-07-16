@@ -13,7 +13,36 @@ const initialState = {
 function shoppingCartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
-      return { ...state, cart: action.payload };
+      const addedProduct = action.payload;
+
+      const existingItem = state.cart.find(
+        (item) => item.product.id === addedProduct.id,
+      );
+
+      if (existingItem) {
+        const updatedCart = state.cart.map((item) =>
+          item.product.id === addedProduct.id
+            ? { ...item, count: item.count + 1 }
+            : item,
+        );
+
+        return {
+          ...state,
+          cart: updatedCart,
+        };
+      } else {
+        const newItem = {
+          count: 1,
+          checked: true,
+          product: addedProduct,
+        };
+
+        return {
+          ...state,
+
+          cart: [...state.cart, newItem],
+        };
+      }
     case SET_PAYMENT:
       return { ...state, payment: action.payload };
     case SET_ADRESS:

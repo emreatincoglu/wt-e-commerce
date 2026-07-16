@@ -7,11 +7,13 @@ import {
   ShoppingCart,
   Star,
 } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../../actions/shoppingCartActions";
 
 function ProductHero() {
   const product = useSelector((store) => store.product.currentProduct);
   const productImages = product.images || [];
+  const dispatch = useDispatch();
   const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
@@ -122,29 +124,25 @@ function ProductHero() {
             >
               Select Options
             </button>
-            {[
-              {
-                label: "Add to wishlist",
-                icon: <Heart aria-hidden="true" size={20} />,
-              },
-              {
-                label: "Add to cart",
-                icon: <ShoppingCart aria-hidden="true" size={20} />,
-              },
-              {
-                label: "View product",
-                icon: <Eye aria-hidden="true" size={20} />,
-              },
-            ].map((item) => (
-              <button
-                aria-label={item.label}
+
+            <button
+                aria-label="Add to wishlist"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e8e8e8] bg-white text-[#252b42]"
-                key={item.label}
+                key="addtowishlist"
                 type="button"
               >
-                {item.icon}
+                <Heart aria-hidden="true" size={20} />
               </button>
-            ))}
+
+              <button
+                aria-label="Add to cart"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e8e8e8] bg-white text-[#252b42] cursor-pointer"
+                key="addtocart"
+                type="button"
+                onClick={() => dispatch(setCart(product))}
+              >
+                <ShoppingCart aria-hidden="true" size={20} />
+              </button>
           </div>
         </div>
       </div>
