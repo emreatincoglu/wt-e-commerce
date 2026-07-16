@@ -1,4 +1,9 @@
+import { useEffect } from "react";
 import ProductCard from "./ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { getProducts } from "../../actions/productActions";
+import ShopProductCard from "../ShopPageComponents/ShopProductCard";
 
 function SectionHeading({ kicker, title, body }) {
   return (
@@ -21,37 +26,61 @@ function SectionHeading({ kicker, title, body }) {
 }
 
 function ProductCardsSection() {
-  const products = Array.from({ length: 12 }, (_, index) => ({
-    title: "Graphic Design",
-    id: `product-${index + 1}`,
-    department: "English Department",
-    oldPrice: "$16.48",
-    price: "$6.48",
-    image: `https://picsum.photos/seed/shop-product-${index + 1}/366/476`,
-    colors: ["#23a6f0", "#23856d", "#e77c40", "#252b42"],
-  }));
+
+  function handleProductClick(productItem) {
+    const productCategoryId = productItem.category_id;
+    const category = categories.find(
+      (category) => category.id === productCategoryId,
+    );
+
+    const productNameSlug = productItem.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "-")
+      .replace(/-+/g, "-");
+
+    history.push(
+      `/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title}/${category.id}/${productNameSlug}/${productItem.id}`,
+    );
+    
+    
+  };
+
+  const products = useSelector((store) => store.product.productList);
+   const categories = useSelector((store) => store.product.categories);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getProducts())
+  },[])
+
+ const topProducts = [...products].sort((a, b) => b.rating - a.rating)
+  .slice(0, 10);
+
 
   return (
     <section className="bg-white">
-      <div className="mx-auto min-h-[1241px] max-w-[1124px] px-6 py-20 md:px-0">
+      <div className="mx-auto min-h-[1241px] max-w-[1124px] px-5 py-14 sm:px-6 md:py-20 xl:px-0">
         <SectionHeading
           body="Problems trying to resolve the conflict between"
           kicker="Featured Products"
           title="BESTSELLER PRODUCTS"
         />
-        <div className="mx-auto mt-20 grid max-w-[1035px] gap-x-[30px] gap-y-[15px] sm:grid-cols-2 md:grid-cols-5">
-          {products.map((product, index) => (
-            <ProductCard
+        <div className="mx-auto mt-12 grid max-w-[1035px] gap-x-[30px] gap-y-[30px] sm:grid-cols-2 md:grid-cols-3 lg:mt-20 lg:grid-cols-4 xl:grid-cols-5 xl:gap-y-[15px]">
+          {topProducts.map((product, index) => (
+             <ShopProductCard
               key={`${product.title}-${index}`}
               product={product}
               id={product.id}
+              handleProductClick={handleProductClick}
             />
           ))}
         </div>
         <div className="mt-8 flex justify-center">
           <button
-            className="h-[52px] w-64 rounded-[5px] border border-[#23a6f0] text-sm font-bold leading-[22px] tracking-[0.2px] text-[#23a6f0]"
+            className="h-[52px] w-64 rounded-[5px] border border-[#23a6f0] text-sm font-bold leading-[22px] tracking-[0.2px] text-[#23a6f0] cursor-pointer"
             type="button"
+            onClick={() => history.push("/shop")}
           >
             LOAD MORE PRODUCTS
           </button>

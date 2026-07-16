@@ -34,7 +34,7 @@ function handleProductClick(productItem) {
   };
   return (
     <section className="bg-[#fafafa] font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto max-w-[1050px] px-6 py-12 md:px-0">
+      <div className="mx-auto max-w-[1050px] px-5 py-12 sm:px-6 lg:px-0">
         <h2 className="border-b border-[#ececec] pb-6 text-2xl font-bold leading-8 tracking-[0.1px] text-[#252b42]">
           BESTSELLER PRODUCTS
         </h2>

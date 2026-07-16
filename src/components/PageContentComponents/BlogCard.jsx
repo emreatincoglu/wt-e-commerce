@@ -22,7 +22,7 @@ function BlogCard({ post }) {
   ];
 
   return (
-    <article className="grid min-h-[404px] overflow-hidden bg-white shadow-[0_13px_19px_rgba(0,0,0,0.07)] md:w-[501px] md:grid-cols-[209px_292px]">
+    <article className="grid min-h-[404px] min-w-0 overflow-hidden bg-white shadow-[0_13px_19px_rgba(0,0,0,0.07)] sm:grid-cols-[minmax(180px,0.8fr)_minmax(0,1.2fr)]">
       <div className="relative min-h-[300px] md:min-h-[404px]">
         <img alt="" className="h-full w-full object-cover" src={post.image} />
         <span className="absolute left-5 top-5 rounded-[3px] bg-[#e74040] px-2.5 py-0.5 text-sm font-bold leading-6 tracking-[0.2px] text-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]">

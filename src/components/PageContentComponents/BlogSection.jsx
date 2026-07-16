@@ -28,16 +28,16 @@ function BlogSection() {
 ];
   return (
     <section className="bg-white">
-      <div className="mx-auto min-h-186 max-w-262.5 px-6 py-20 md:px-0">
-        <div className="mx-auto w-77.25 text-center">
+      <div className="mx-auto min-h-186 max-w-[1050px] px-5 py-14 sm:px-6 md:py-20 lg:px-0">
+        <div className="mx-auto w-full max-w-[309px] text-center">
           <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#23a6f0]">
             Practice Advice
           </p>
-          <h2 className="mt-2.5 text-[40px] font-bold leading-[50px] tracking-[0.2px] text-[#252b42]">
+          <h2 className="mt-2.5 text-[32px] font-bold leading-10 tracking-[0.2px] text-[#252b42] sm:text-[40px] sm:leading-[50px]">
             Featured Posts
           </h2>
         </div>
-        <div className="mt-24 grid gap-[30px] md:grid-cols-[508px_512px]">
+        <div className="mt-12 grid gap-[30px] md:mt-20 lg:grid-cols-2">
           {blogPosts.slice(0, 2).map((post, index) => (
             <BlogCard key={`${post.title}-${index}`} post={post} />
           ))}

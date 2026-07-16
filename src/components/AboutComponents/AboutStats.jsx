@@ -11,7 +11,7 @@ function AboutStats() {
   return (
     <section className="bg-white py-12 font-['Montserrat',ui-sans-serif,system-ui]">
       <div className="mx-auto max-w-[1050px] px-6 md:px-0">
-        <div className="grid gap-8 md:grid-cols-[394px_545px] md:items-center md:gap-[86px]">
+        <div className="grid gap-8 md:grid-cols-2 md:items-center lg:grid-cols-[394px_545px] lg:gap-[86px]">
           <div>
             <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#e74040]">
               Problems trying
@@ -26,10 +26,10 @@ function AboutStats() {
           </p>
         </div>
 
-        <div className="mt-20 grid gap-10 text-center sm:grid-cols-2 md:grid-cols-4">
+        <div className="mt-14 grid gap-10 text-center sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <p className="text-[58px] font-bold leading-[80px] tracking-[0.2px] text-[#252b42]">
+              <p className="text-[48px] font-bold leading-[64px] tracking-[0.2px] text-[#252b42] sm:text-[58px] sm:leading-[80px]">
                 {stat.value}
               </p>
               <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">

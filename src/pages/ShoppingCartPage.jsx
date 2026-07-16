@@ -34,7 +34,7 @@ function ShoppingCartPage() {
       <Header />
       <main>
         <section className="border-y border-[#f0f0f0] bg-[#fafafa]">
-          <div className="mx-auto flex min-h-[92px] max-w-[1050px] items-center gap-3 px-6 text-sm font-bold md:px-0">
+          <div className="mx-auto flex min-h-[80px] max-w-[1050px] items-center gap-3 px-5 text-sm font-bold sm:px-6 md:min-h-[92px] lg:px-0">
             <NavLink className="text-[#252b42]" exact to="/">
               Home
             </NavLink>
@@ -60,7 +60,7 @@ function ShoppingCartPage() {
             </button>
           </div>
 
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
             <ShoppingCartTable cartItems={cartItems} />
 
             <aside className="rounded-[6px] border border-[#ececec] bg-white p-6">

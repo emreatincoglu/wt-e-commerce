@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import heroImage from "../../assets/image.png";
 
-const heroImage =
-  'https://www.figma.com/api/mcp/asset/edd0b1ab-c6da-4d6f-901f-ac81060e100a';
+
 
 function HeroSection() {
   return (

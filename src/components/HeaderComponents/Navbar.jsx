@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import Gravatar from 'react-gravatar';
 import {
@@ -7,6 +7,7 @@ import {
   Menu,
   Search,
   User,
+  X,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../actions/productActions";
@@ -19,10 +20,15 @@ function Navbar() {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const categoryColumns = useMemo(() => {
     const groups = {
@@ -49,6 +55,7 @@ function Navbar() {
   }, [categories]);
 
   const navigateTo = (path) => {
+    setIsMobileMenuOpen(false);
     history.push(path);
   };
 
@@ -72,34 +79,45 @@ function Navbar() {
     }`;
 
   const mobileNavClassName = (path) =>
-    `text-[30px] font-normal leading-[45px] tracking-[0.2px] ${
-      isActivePath(path) ? "text-[#252b42]" : "text-[#737373]"
+    `text-xl font-bold leading-8 tracking-[0.2px] ${
+      isActivePath(path) ? "text-[#23a6f0]" : "text-[#737373]"
     }`;
 
   return (
     <>
       
-      <div className="md:hidden">
-        <div className="relative h-[532px]">
+      <div className="border-b border-[#f0f0f0] md:hidden">
+        <div className="flex min-h-24 items-center justify-between gap-4 px-6">
           <NavLink
-            className="absolute left-[35px] top-[36px] text-2xl font-bold leading-8 tracking-[0.1px] text-[#252b42]"
+            className="shrink-0 text-2xl font-bold leading-8 tracking-[0.1px] text-[#252b42]"
             exact
             to="/"
           >
             Bandage
           </NavLink>
           
-          <div className="absolute right-[37px] top-10 flex items-center gap-6 text-[#252b42]">
+          <div className="flex items-center gap-5 text-[#252b42]">
             <button aria-label="Search" type="button">
               <Search aria-hidden="true" size={24} strokeWidth={2} />
             </button>
             <ShoppingCartDropdown mobile />
-            <button aria-label="Menu" type="button">
-              <Menu aria-hidden="true" size={25} strokeWidth={2} />
+            <button
+              aria-expanded={isMobileMenuOpen}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              type="button"
+            >
+              {isMobileMenuOpen ? (
+                <X aria-hidden="true" size={25} strokeWidth={2} />
+              ) : (
+                <Menu aria-hidden="true" size={25} strokeWidth={2} />
+              )}
             </button>
           </div>
+        </div>
 
-          <nav className="absolute left-1/2 top-[164px] flex -translate-x-1/2 flex-col items-center gap-[30px]">
+        {isMobileMenuOpen && (
+          <nav className="flex flex-col items-center gap-5 border-t border-[#f0f0f0] px-6 py-8">
             <button className={mobileNavClassName("/")} onClick={() => navigateTo("/")} type="button">
               Home
             </button>
@@ -117,7 +135,7 @@ function Navbar() {
             </button>
 
             
-            <div className="mt-4 flex flex-col items-center gap-4 text-[#23a6f0]">
+            <div className="mt-2 flex flex-col items-center gap-4 border-t border-[#ececec] pt-6 text-[#23a6f0]">
               {isLoggedIn ? (
                 <div className="flex flex-col items-center gap-2">
                   <div className="h-12 w-12 overflow-hidden rounded-full border border-slate-200 shadow-sm">
@@ -137,7 +155,7 @@ function Navbar() {
               )}
             </div>
           </nav>
-        </div>
+        )}
       </div>
 
       {/* 2. MASAÜSTÜ ALAN (md:flex) */}

@@ -3,7 +3,7 @@ import React from "react";
 function AboutHero() {
   return (
     <section className="bg-white font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto grid min-h-[620px] max-w-[1050px] items-center gap-12 px-6 py-14 md:grid-cols-[420px_1fr] md:px-0">
+      <div className="mx-auto grid min-h-[620px] max-w-[1050px] items-center gap-10 px-5 py-12 sm:px-6 md:grid-cols-2 md:py-14 lg:grid-cols-[420px_1fr] lg:gap-12 lg:px-0">
         <div className="text-center md:text-left">
           <p className="text-base font-bold leading-6 tracking-[0.1px] text-[#252b42]">
             ABOUT COMPANY
@@ -22,15 +22,15 @@ function AboutHero() {
           </a>
         </div>
 
-        <div className="relative mx-auto h-[430px] w-full max-w-[520px] overflow-hidden md:h-[520px]">
-          <div className="absolute left-[64px] top-[24px] h-[420px] w-[420px] rounded-full bg-[#ffe9ea] md:h-[500px] md:w-[500px]" />
+        <div className="relative mx-auto aspect-square w-full max-w-[520px] overflow-hidden">
+          <div className="absolute left-[12%] top-[5%] h-[90%] w-[90%] rounded-full bg-[#ffe9ea]" />
           <div className="absolute left-[18px] top-[38px] h-[56px] w-[56px] rounded-full bg-[#ffe9ea]" />
           <div className="absolute right-[10px] top-[150px] h-4 w-4 rounded-full bg-[#977df4]" />
           <div className="absolute bottom-[95px] left-[18px] h-3 w-3 rounded-full bg-[#977df4]" />
           <div className="absolute right-[42px] top-[240px] h-[26px] w-[26px] rounded-full bg-[#ffe9ea]" />
           <img
             alt=""
-            className="absolute bottom-0 left-1/2 h-[470px] max-w-none -translate-x-1/2 object-contain md:h-[560px]"
+            className="absolute bottom-0 left-1/2 h-[108%] max-w-none -translate-x-1/2 object-contain"
             src="https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?auto=format&fit=crop&w=760&q=80"
           />
         </div>

@@ -7,7 +7,7 @@ function ProductBreadcrumb() {
 
   return (
     <section className="bg-[#fafafa] font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto flex min-h-[92px] max-w-[1050px] items-center gap-6 px-6 md:px-0">
+      <div className="mx-auto flex min-h-[80px] max-w-[1050px] items-center gap-4 px-5 sm:px-6 md:min-h-[92px] lg:px-0">
         <button
           aria-label="Go back"
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#e8e8e8] bg-white text-[#252b42] transition-colors hover:border-[#23a6f0] hover:text-[#23a6f0]"

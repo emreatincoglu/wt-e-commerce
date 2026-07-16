@@ -31,7 +31,7 @@ function ShoppingCartTable({ cartItems }) {
       role="table"
     >
       <div
-        className="hidden min-h-14 grid-cols-[minmax(330px,1fr)_120px_150px_120px_44px] items-center gap-5 bg-[#fafafa] px-7 text-xs font-bold uppercase text-[#737373] md:grid"
+        className="hidden min-h-14 grid-cols-[minmax(300px,1fr)_110px_140px_110px_44px] items-center gap-4 bg-[#fafafa] px-6 text-xs font-bold uppercase text-[#737373] lg:grid xl:grid-cols-[minmax(330px,1fr)_120px_150px_120px_44px] xl:gap-5 xl:px-7"
         role="row"
       >
         <div role="columnheader">Product</div>

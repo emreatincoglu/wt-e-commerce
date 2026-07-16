@@ -10,9 +10,9 @@ const descriptionPoints = [
 function ProductDescription() {
   return (
     <section className="bg-white font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto max-w-[1050px] px-6 md:px-0">
+      <div className="mx-auto max-w-[1050px] px-5 sm:px-6 lg:px-0">
         <div className="flex min-h-[72px] items-center justify-center border-b border-[#ececec]">
-          <nav className="flex flex-wrap justify-center gap-8 text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">
+          <nav className="flex flex-wrap justify-center gap-x-5 gap-y-3 py-4 text-center text-sm font-bold leading-6 tracking-[0.2px] text-[#737373] sm:gap-8">
             <a className="text-[#737373]" href="/">
               Description
             </a>
@@ -23,7 +23,7 @@ function ProductDescription() {
           </nav>
         </div>
 
-        <div className="grid gap-[30px] py-12 md:grid-cols-[332px_332px_332px]">
+        <div className="grid gap-[30px] py-10 md:grid-cols-3 md:py-12">
           <div className="overflow-hidden rounded-[6px] shadow-[0_13px_19px_rgba(0,0,0,0.07)]">
             <img
               alt=""

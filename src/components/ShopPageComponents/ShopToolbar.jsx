@@ -16,12 +16,12 @@ function ShopToolbar() {
 
   return (
     <section className="bg-white font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto flex min-h-[98px] max-w-[1050px] flex-col items-center justify-between gap-6 px-6 py-6 md:flex-row md:px-0">
+      <div className="mx-auto flex min-h-[98px] max-w-[1050px] flex-col items-stretch justify-between gap-5 px-5 py-6 sm:px-6 lg:flex-row lg:items-center lg:px-0">
         <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">
           Showing all {products.length} results
         </p>
 
-        <div className="flex items-center gap-[15px]">
+        <div className="flex items-center justify-center gap-[15px] lg:justify-start">
           <span className="text-sm font-bold leading-6 tracking-[0.2px] text-[#737373]">
             Views:
           </span>
@@ -41,7 +41,7 @@ function ShopToolbar() {
           </button>
         </div>
 
-        <div className="flex items-center gap-[15px]">
+        <div className="flex w-full items-center gap-[15px] sm:mx-auto sm:max-w-md lg:mx-0 lg:w-auto">
           <input
              // Referansı input'a bağlıyoruz
             type="search"
@@ -54,10 +54,10 @@ function ShopToolbar() {
           />
         </div>
 
-        <div className="flex items-center gap-[15px]">
+        <div className="flex w-full items-center gap-[15px] sm:mx-auto sm:max-w-md lg:mx-0 lg:w-auto">
           <select
             aria-label="Sort products"
-            className="h-[50px] w-[155px] rounded-[5px] border border-[#ddd] bg-[#f9f9f9] px-[10px] text-sm leading-7 tracking-[0.2px] text-[#737373] outline-none"
+            className="h-[50px] min-w-0 flex-1 rounded-[5px] border border-[#ddd] bg-[#f9f9f9] px-[10px] text-sm leading-7 tracking-[0.2px] text-[#737373] outline-none lg:w-[155px] lg:flex-none"
             value={localSort}
             // Seçim değiştiğinde SADECE lokal state değişir, API isteği atılmaz
             onChange={(e) => setLocalSort(e.target.value)}

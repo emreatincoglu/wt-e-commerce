@@ -21,7 +21,7 @@ function ShoppingCartItemRow({ item }) {
 
   return (
     <div
-      className="grid gap-5 border-t border-[#ececec] px-5 py-6 first:border-t-0 md:grid-cols-[minmax(330px,1fr)_120px_150px_120px_44px] md:items-center md:px-7"
+      className="grid gap-5 border-t border-[#ececec] px-5 py-6 first:border-t-0 lg:grid-cols-[minmax(300px,1fr)_110px_140px_110px_44px] lg:items-center lg:gap-4 lg:px-6 xl:grid-cols-[minmax(330px,1fr)_120px_150px_120px_44px] xl:gap-5 xl:px-7"
       role="row"
     >
       <div className="flex min-w-0 items-center gap-4" role="cell">
@@ -54,15 +54,15 @@ function ShoppingCartItemRow({ item }) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between md:block" role="cell">
-        <span className="text-xs font-bold text-[#737373] md:hidden">Price</span>
+      <div className="flex items-center justify-between lg:block" role="cell">
+        <span className="text-xs font-bold text-[#737373] lg:hidden">Price</span>
         <span className="text-sm font-bold text-[#252b42]">
           {formatPrice(product.price)}
         </span>
       </div>
 
-      <div className="flex items-center justify-between md:justify-center" role="cell">
-        <span className="text-xs font-bold text-[#737373] md:hidden">Quantity</span>
+      <div className="flex items-center justify-between lg:justify-center" role="cell">
+        <span className="text-xs font-bold text-[#737373] lg:hidden">Quantity</span>
         <div className="flex h-10 overflow-hidden rounded-[5px] border border-[#dedede] bg-white">
           <button
             aria-label={`Decrease ${product.name} quantity`}
@@ -87,8 +87,8 @@ function ShoppingCartItemRow({ item }) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between md:block md:text-right" role="cell">
-        <span className="text-xs font-bold text-[#737373] md:hidden">Total</span>
+      <div className="flex items-center justify-between lg:block lg:text-right" role="cell">
+        <span className="text-xs font-bold text-[#737373] lg:hidden">Total</span>
         <span className="text-base font-bold text-[#23a6f0]">
           {formatPrice(product.price * count)}
         </span>

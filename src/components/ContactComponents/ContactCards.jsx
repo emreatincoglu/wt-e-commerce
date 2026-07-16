@@ -26,11 +26,11 @@ function ContactCards() {
         <p className="text-sm font-bold leading-6 tracking-[0.2px] text-[#252b42]">
           VISIT OUR OFFICE
         </p>
-        <h2 className="mx-auto mt-2.5 max-w-[531px] text-[40px] font-bold leading-[50px] tracking-[0.2px] text-[#252b42]">
+        <h2 className="mx-auto mt-2.5 max-w-[531px] text-[32px] font-bold leading-10 tracking-[0.2px] text-[#252b42] sm:text-[40px] sm:leading-[50px]">
           We help small businesses with big ideas
         </h2>
 
-        <div className="mt-20 grid items-center md:grid-cols-3">
+        <div className="mt-14 grid items-center md:mt-20 md:grid-cols-3">
           {cards.map((card, index) => (
             <article
               className={`flex min-h-[343px] flex-col items-center justify-center px-10 py-[50px] ${

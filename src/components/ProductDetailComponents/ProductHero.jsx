@@ -25,9 +25,9 @@ function ProductHero() {
 
   return (
     <section className="bg-[#fafafa] font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto grid max-w-[1050px] gap-[30px] px-6 pb-12 md:grid-cols-[506px_1fr] md:px-0">
-        <div>
-          <div className="relative h-[450px] overflow-hidden bg-white">
+      <div className="mx-auto grid max-w-[1050px] gap-[30px] px-5 pb-12 sm:px-6 md:grid-cols-2 lg:grid-cols-[506px_1fr] lg:px-0">
+        <div className="min-w-0">
+          <div className="relative h-[360px] overflow-hidden bg-white sm:h-[450px]">
             <img
               alt={product.name}
               className="h-full w-full object-cover"
@@ -61,7 +61,7 @@ function ProductHero() {
               </button>
             )}
           </div>
-          <div className="mt-[21px] flex gap-[19px]">
+          <div className="mt-[21px] flex gap-[12px] overflow-x-auto pb-2 sm:gap-[19px]">
             {productImages.map((image, index) => (
               <button
                 aria-label={`Show product image ${index + 1}`}

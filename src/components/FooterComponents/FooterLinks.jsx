@@ -24,7 +24,7 @@ const footerSections = [
 function FooterLinks() {
   return (
     <div className="border-t border-[#e6e6e6] bg-white">
-      <div className="mx-auto grid max-w-[1050px] gap-[30px] px-[46px] py-[70px] md:grid-cols-[148px_152px_148px_152px_321px] md:px-0 md:py-[50px]">
+      <div className="mx-auto grid max-w-[1050px] gap-10 px-6 py-14 sm:grid-cols-2 sm:px-10 md:grid-cols-3 lg:grid-cols-[148px_152px_148px_152px_321px] lg:gap-[30px] lg:px-0 lg:py-[50px]">
         {footerSections.map((section) => (
           <FooterColumn key={section.title} {...section} />
         ))}

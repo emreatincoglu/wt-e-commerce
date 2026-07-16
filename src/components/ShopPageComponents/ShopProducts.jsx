@@ -78,7 +78,7 @@ function ShopProducts() {
   }, [categoryId, dispatch, filter, limit, offset, queryKey, sort]);
 
   return isFetched ? (
-    <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+    <div className="grid min-h-[140px] w-full place-items-center rounded-lg p-6">
       <svg
         className="text-cyan-400 animate-spin"
         viewBox="0 0 64 64"
@@ -106,7 +106,7 @@ function ShopProducts() {
     </div>
   ) : (
     <section className="bg-white font-['Montserrat',ui-sans-serif,system-ui]">
-      <div className="mx-auto max-w-[1050px] px-6 pb-12 md:px-0">
+      <div className="mx-auto max-w-[1050px] px-5 pb-12 sm:px-6 lg:px-0">
         <div className="grid gap-x-[30px] gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product, index) => (
             <ShopProductCard
@@ -133,5 +133,4 @@ function ShopProducts() {
 
 
 export default ShopProducts;
-
 

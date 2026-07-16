@@ -49,7 +49,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen overflow-x-hidden bg-white text-slate-900">
       <main>
         <Switch>
           <Route exact path="/" component={HomePage} />

@@ -53,7 +53,7 @@ function LoginForm() {
     <div className="flex min-h-screen items-center justify-center bg-slate-50 p-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md space-y-7 rounded-[2rem] bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:p-10"
+        className="w-full max-w-md space-y-6 rounded-[16px] bg-white p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:space-y-7 sm:p-10"
       >
         <div className="flex flex-col gap-1.5">
           <label
