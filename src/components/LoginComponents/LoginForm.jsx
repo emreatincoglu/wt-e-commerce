@@ -2,6 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, setLoading } from "../../actions/clientActions";
+import { getUserAdress } from "../../actions/shoppingCartActions";
 
 const inputClassName =
   "w-full rounded-full border border-slate-200 bg-slate-50 px-6 py-3.5 text-sm text-slate-700 placeholder-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-500";
@@ -45,7 +46,6 @@ function LoginForm() {
     const payload = buildPayload(data);
 
     dispatch(setLoading(true));
-
     dispatch(loginUser(payload, history, data.rememberMe));
   };
 

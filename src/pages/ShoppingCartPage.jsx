@@ -43,7 +43,7 @@ function ShoppingCartPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1200px] px-5 py-10 md:px-8 md:py-14">
+        <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
             <div>
               <h1 className="text-3xl font-bold text-[#252b42]">Shopping Cart</h1>
@@ -60,7 +60,7 @@ function ShoppingCartPage() {
             </button>
           </div>
 
-          <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">
             <ShoppingCartTable cartItems={cartItems} />
 
             <aside className="rounded-[6px] border border-[#ececec] bg-white p-6">

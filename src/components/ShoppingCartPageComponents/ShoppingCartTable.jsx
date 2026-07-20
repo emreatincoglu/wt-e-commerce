@@ -27,18 +27,18 @@ function ShoppingCartTable({ cartItems }) {
   return (
     <div
       aria-label="Shopping cart items"
-      className="overflow-hidden rounded-[6px] border border-[#ececec] bg-white"
+      className="min-w-0 overflow-hidden rounded-[6px] border border-[#ececec] bg-white"
       role="table"
     >
       <div
-        className="hidden min-h-14 grid-cols-[minmax(300px,1fr)_110px_140px_110px_44px] items-center gap-4 bg-[#fafafa] px-6 text-xs font-bold uppercase text-[#737373] lg:grid xl:grid-cols-[minmax(330px,1fr)_120px_150px_120px_44px] xl:gap-5 xl:px-7"
+        className="hidden min-h-12 grid-cols-[minmax(260px,1fr)_88px_108px_90px_40px] items-center gap-3 bg-[#fafafa] px-5 text-xs font-bold uppercase text-[#737373] lg:grid"
         role="row"
       >
         <div role="columnheader">Product</div>
         <div role="columnheader">Price</div>
         <div className="text-center" role="columnheader">Quantity</div>
         <div className="text-right" role="columnheader">Total</div>
-        <div aria-label="Actions" role="columnheader" />
+        <div className="text-center" role="columnheader">Remove</div>
       </div>
 
       <div role="rowgroup">

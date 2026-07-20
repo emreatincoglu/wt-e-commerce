@@ -21,10 +21,10 @@ function ShoppingCartItemRow({ item }) {
 
   return (
     <div
-      className="grid gap-5 border-t border-[#ececec] px-5 py-6 first:border-t-0 lg:grid-cols-[minmax(300px,1fr)_110px_140px_110px_44px] lg:items-center lg:gap-4 lg:px-6 xl:grid-cols-[minmax(330px,1fr)_120px_150px_120px_44px] xl:gap-5 xl:px-7"
+      className="grid gap-4 border-t border-[#ececec] px-4 py-4 first:border-t-0 sm:px-5 lg:grid-cols-[minmax(260px,1fr)_88px_108px_90px_40px] lg:items-center lg:gap-3 lg:px-5 lg:py-4"
       role="row"
     >
-      <div className="flex min-w-0 items-center gap-4" role="cell">
+      <div className="flex min-w-0 items-center gap-3" role="cell">
         <input
           aria-label={`Select ${product.name}`}
           checked={checked}
@@ -32,7 +32,7 @@ function ShoppingCartItemRow({ item }) {
           onChange={() => dispatch(toggleCartItem(product.id))}
           type="checkbox"
         />
-        <div className="h-[104px] w-[84px] shrink-0 overflow-hidden rounded-[4px] border border-[#e6e6e6] bg-[#f7f7f7]">
+        <div className="h-[84px] w-[68px] shrink-0 overflow-hidden rounded-[4px] border border-[#e6e6e6] bg-[#f7f7f7]">
           {image && (
             <img
               alt={product.name}
@@ -42,13 +42,13 @@ function ShoppingCartItemRow({ item }) {
           )}
         </div>
         <div className="min-w-0">
-          <h2 className="text-sm font-bold leading-5 text-[#252b42] md:text-base">
+          <h2 className="line-clamp-1 text-sm font-bold leading-5 text-[#252b42]">
             {product.name}
           </h2>
-          <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#737373] md:text-sm">
+          <p className="mt-0.5 line-clamp-1 text-xs leading-5 text-[#737373]">
             {product.description}
           </p>
-          <p className="mt-2 text-xs font-bold text-[#23856d]">
+          <p className="mt-1 text-xs font-bold text-[#23856d]">
             {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
           </p>
         </div>
@@ -63,22 +63,22 @@ function ShoppingCartItemRow({ item }) {
 
       <div className="flex items-center justify-between lg:justify-center" role="cell">
         <span className="text-xs font-bold text-[#737373] lg:hidden">Quantity</span>
-        <div className="flex h-10 overflow-hidden rounded-[5px] border border-[#dedede] bg-white">
+        <div className="flex h-9 overflow-hidden rounded-[5px] border border-[#dedede] bg-white">
           <button
             aria-label={`Decrease ${product.name} quantity`}
-            className="flex w-10 items-center justify-center text-[#737373] transition-colors hover:bg-[#f5f5f5] disabled:cursor-not-allowed disabled:text-[#d5d5d5]"
+            className="flex w-8 items-center justify-center text-[#737373] transition-colors hover:bg-[#f5f5f5] disabled:cursor-not-allowed disabled:text-[#d5d5d5]"
             disabled={count <= 1}
             onClick={() => dispatch(updateCartItemCount(product.id, count - 1))}
             type="button"
           >
             <Minus aria-hidden="true" size={16} />
           </button>
-          <span className="flex w-11 items-center justify-center border-x border-[#dedede] text-sm font-bold text-[#252b42]">
+          <span className="flex w-9 items-center justify-center border-x border-[#dedede] text-sm font-bold text-[#252b42]">
             {count}
           </span>
           <button
             aria-label={`Increase ${product.name} quantity`}
-            className="flex w-10 items-center justify-center text-[#23a6f0] transition-colors hover:bg-[#f5faff]"
+            className="flex w-8 items-center justify-center text-[#23a6f0] transition-colors hover:bg-[#f5faff]"
             onClick={() => dispatch(updateCartItemCount(product.id, count + 1))}
             type="button"
           >
@@ -89,19 +89,19 @@ function ShoppingCartItemRow({ item }) {
 
       <div className="flex items-center justify-between lg:block lg:text-right" role="cell">
         <span className="text-xs font-bold text-[#737373] lg:hidden">Total</span>
-        <span className="text-base font-bold text-[#23a6f0]">
+        <span className="whitespace-nowrap text-sm font-bold text-[#23a6f0]">
           {formatPrice(product.price * count)}
         </span>
       </div>
 
-      <div className="flex justify-end" role="cell">
+      <div className="flex justify-end lg:justify-center" role="cell">
         <button
           aria-label={`Remove ${product.name} from cart`}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-[#737373] transition-colors hover:bg-[#fff1f1] hover:text-[#e74040]"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-[#737373] transition-colors hover:bg-[#fff1f1] hover:text-[#e74040]"
           onClick={() => dispatch(removeCartItem(product.id))}
           type="button"
         >
-          <Trash2 aria-hidden="true" size={19} />
+          <Trash2 aria-hidden="true" size={18} />
         </button>
       </div>
     </div>

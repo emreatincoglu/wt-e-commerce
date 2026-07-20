@@ -8,6 +8,7 @@ export const SET_THEME = "SET_THEME";
 export const SET_LANGUAGE = "SET_LANGUAGE";
 export const GET_ROLES = "GET_ROLES";
 export const SET_LOADING = "SET_LOADING"; // Yeni action type
+export const SET_ADRESS_LIST = "SET_ADRESS_LIST";
 
 
 
@@ -16,6 +17,14 @@ export function setUser(user) {
   return {
     type: SET_USER,
     payload: user,
+  };
+}
+
+
+export function setAdressList(adressList) {
+  return {
+    type: SET_ADRESS_LIST,
+    payload: adressList,
   };
 }
 
@@ -86,6 +95,8 @@ export const loginUser = (userData, history, rememberMe = false) => (dispatch) =
 
       if (token) {
         instance.defaults.headers.common.Authorization = token;
+
+        
       }
 
       dispatch(setUser(response.data));
@@ -106,26 +117,19 @@ export const loginUser = (userData, history, rememberMe = false) => (dispatch) =
     });
 }
 
-// Thunk fonksiyonu dispatch'in yanında getState'i de parametre olarak alabilir
 export const getRoles = () => (dispatch, getState) => {
   
-  // 1. KONTROL AŞAMASI: Redux store'unda roller zaten var mı?
-  // (State yolunu kendi reducer yapına göre uyarlayabilirsin, örneğin getState().client.roles)
   const currentRoles = getState().client.roles; 
   
   if (currentRoles && currentRoles.length > 0) {
-    // Eğer dizinin içinde zaten eleman varsa, işlemi burada bitir (API'ye istek atma)
     return; 
   }
 
-  // 2. İSTEK AŞAMASI: Eğer roller yoksa API'den çek
   instance.get("/roles")
     .then((response) => {
-      // 3. BAŞARILI DURUM: Gelen veriyi store'a yaz
       dispatch(setRoles([...response.data].reverse()));
     })
     .catch((error) => {
-      // 4. HATA DURUMU: .catch bloğu dispatch'in değil, then bloğunun sonundadır
       console.error("Error fetching roles:", error);
     });
 };

@@ -14,6 +14,8 @@ import ShoppingCartPage from "./pages/ShoppingCartPage";
 import instance from "./api/axiosInstance";
 import { useDispatch } from "react-redux";
 import { verifyUser } from "./actions/clientActions";
+import CreateOrderPage from "./pages/CreateOrderPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const toastIconByType = {
   success: CheckCircle2,
@@ -57,6 +59,7 @@ function App() {
           <Route exact path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" component={ProductDetailPage} />
           <Route exact path="/shop" component={ShopPage} />
           <Route exact path="/cart" component={ShoppingCartPage} />
+          <ProtectedRoute exact path="/checkout" component={CreateOrderPage} />
           <Route path="/shop/:gender/:categoryName/:categoryId">
             <ShopPage/>
           </Route>
