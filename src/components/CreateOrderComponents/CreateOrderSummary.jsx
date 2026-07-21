@@ -8,7 +8,14 @@ function formatPrice(price) {
   }).format(Number(price) || 0);
 }
 
-function CreateOrderSummary({ disabled, itemCount, onContinue, subtotal }) {
+function CreateOrderSummary({
+  activeStep,
+  disabled,
+  isSubmitting,
+  itemCount,
+  onContinue,
+  subtotal,
+}) {
   return (
     <aside className="rounded-[6px] border border-[#ececec] bg-white p-6 xl:sticky xl:top-5">
       <h2 className="text-xl font-bold text-[#252b42]">Order Summary</h2>
@@ -32,11 +39,17 @@ function CreateOrderSummary({ disabled, itemCount, onContinue, subtotal }) {
         onClick={onContinue}
         type="button"
       >
-        Save Address
+        {activeStep === 1
+          ? "Save Address and Continue"
+          : isSubmitting
+            ? "Creating Order..."
+            : "Place Order"}
       </button>
       <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-[#737373]">
         <LockKeyhole aria-hidden="true" size={14} />
-        Payment will be added in the next step later.
+        {activeStep === 1
+          ? "Continue to choose your payment method."
+          : "Your card number and security code are handled securely."}
       </p>
     </aside>
   );

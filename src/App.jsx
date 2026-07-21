@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { verifyUser } from "./actions/clientActions";
 import CreateOrderPage from "./pages/CreateOrderPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PreviousOrdersPage from "./pages/PreviousOrdersPage";
 
 const toastIconByType = {
   success: CheckCircle2,
@@ -60,6 +61,7 @@ function App() {
           <Route exact path="/shop" component={ShopPage} />
           <Route exact path="/cart" component={ShoppingCartPage} />
           <ProtectedRoute exact path="/checkout" component={CreateOrderPage} />
+          <ProtectedRoute exact path="/orders" component={PreviousOrdersPage} />
           <Route path="/shop/:gender/:categoryName/:categoryId">
             <ShopPage/>
           </Route>

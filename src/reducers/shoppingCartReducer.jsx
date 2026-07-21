@@ -5,6 +5,7 @@ import {
   UPDATE_CART_ITEM_COUNT,
   REMOVE_CART_ITEM,
   TOGGLE_CART_ITEM,
+  RESET_CART,
 } from "../actions/shoppingCartActions";
 
 const initialState = {
@@ -73,6 +74,8 @@ function shoppingCartReducer(state = initialState, action) {
             : item,
         ),
       };
+    case RESET_CART:
+      return initialState;
     default:
       return state;
   }

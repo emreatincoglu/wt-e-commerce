@@ -9,6 +9,8 @@ export const SET_LANGUAGE = "SET_LANGUAGE";
 export const GET_ROLES = "GET_ROLES";
 export const SET_LOADING = "SET_LOADING"; // Yeni action type
 export const SET_ADRESS_LIST = "SET_ADRESS_LIST";
+export const SET_CREDIT_CARDS = "SET_CREDIT_CARDS";
+export const SET_ORDER_LIST = "SET_ORDER_LIST";
 
 
 
@@ -25,6 +27,20 @@ export function setAdressList(adressList) {
   return {
     type: SET_ADRESS_LIST,
     payload: adressList,
+  };
+}
+
+export function setCreditCards(creditCards) {
+  return {
+    type: SET_CREDIT_CARDS,
+    payload: creditCards,
+  };
+}
+
+export function setOrderList(orderList) {
+  return {
+    type: SET_ORDER_LIST,
+    payload: orderList,
   };
 }
 

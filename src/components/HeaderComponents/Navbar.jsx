@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import Gravatar from 'react-gravatar';
 import {
   ChevronDown,
   Heart,
   Menu,
+  Package,
   Search,
   User,
   X,
@@ -21,6 +22,8 @@ function Navbar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef(null);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -28,7 +31,19 @@ function Navbar() {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsUserMenuOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const closeUserMenu = (event) => {
+      if (!userMenuRef.current?.contains(event.target)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", closeUserMenu);
+    return () => document.removeEventListener("mousedown", closeUserMenu);
+  }, []);
 
   const categoryColumns = useMemo(() => {
     const groups = {
@@ -142,6 +157,14 @@ function Navbar() {
                     <Gravatar email={user.email} size={48} default="mp" className="h-full w-full object-cover" />
                   </div>
                   <span className="text-lg font-bold  text-[#23a6f0]">{user.name}</span>
+                  <button
+                    className="mt-2 flex items-center gap-2 text-base font-bold text-[#252b42]"
+                    onClick={() => navigateTo("/orders")}
+                    type="button"
+                  >
+                    <Package aria-hidden="true" size={18} />
+                    My Orders
+                  </button>
                 </div>
               ) : (
                 <>
@@ -224,18 +247,48 @@ function Navbar() {
         <div className="flex items-center text-[#23a6f0]">
           
           {isLoggedIn ? (
-            <div className="flex items-center gap-2 p-[15px]">
-              <div className="h-7 w-7 shrink-0 overflow-hidden rounded-full border border-slate-200">
-                <Gravatar 
-                  email={user.email} 
-                  size={28} 
-                  default="mp" 
-                  className="h-full w-full object-cover" 
+            <div className="relative" ref={userMenuRef}>
+              <button
+                aria-expanded={isUserMenuOpen}
+                aria-haspopup="menu"
+                className="flex items-center gap-2 p-[15px]"
+                onClick={() => setIsUserMenuOpen((open) => !open)}
+                type="button"
+              >
+                <div className="h-7 w-7 shrink-0 overflow-hidden rounded-full border border-slate-200">
+                  <Gravatar
+                    email={user.email}
+                    size={28}
+                    default="mp"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <span className="hidden max-w-[150px] truncate text-sm font-bold leading-6 tracking-[0.2px] text-[#23a6f0] lg:inline">
+                  {user.name}
+                </span>
+                <ChevronDown
+                  aria-hidden="true"
+                  className={`transition-transform ${isUserMenuOpen ? "rotate-180" : ""}`}
+                  size={15}
                 />
-              </div>
-              <span className="hidden text-sm font-bold leading-6 tracking-[0.2px] text-[#23a6f0] lg:inline">
-                {user.name}
-              </span>
+              </button>
+
+              {isUserMenuOpen && (
+                <div
+                  className="absolute right-0 top-full z-50 w-52 overflow-hidden rounded-[6px] border border-[#ececec] bg-white py-2 text-[#252b42] shadow-[0_10px_28px_rgba(0,0,0,0.12)]"
+                  role="menu"
+                >
+                  <button
+                    className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-bold transition-colors hover:bg-[#f4fbff] hover:text-[#23a6f0]"
+                    onClick={() => navigateTo("/orders")}
+                    role="menuitem"
+                    type="button"
+                  >
+                    <Package aria-hidden="true" size={18} />
+                    My Orders
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="flex items-center">
